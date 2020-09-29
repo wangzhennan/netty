@@ -27,10 +27,11 @@ import java.lang.reflect.Constructor;
 public class ReflectiveChannelFactory<T extends Channel> implements ChannelFactory<T> {
 
     private final Constructor<? extends T> constructor;
-
+    //通过反射获取对象
     public ReflectiveChannelFactory(Class<? extends T> clazz) {
         ObjectUtil.checkNotNull(clazz, "clazz");
         try {
+            //获取构造函数
             this.constructor = clazz.getConstructor();
         } catch (NoSuchMethodException e) {
             throw new IllegalArgumentException("Class " + StringUtil.simpleClassName(clazz) +

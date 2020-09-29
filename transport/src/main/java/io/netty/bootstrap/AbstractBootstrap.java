@@ -49,6 +49,8 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * <p>When not used in a {@link ServerBootstrap} context, the {@link #bind()} methods are useful for connectionless
  * transports such as datagram (UDP).</p>
+ *  创建一个简单的bootstrap
+ *
  */
 public abstract class AbstractBootstrap<B extends AbstractBootstrap<B, C>, C extends Channel> implements Cloneable {
     @SuppressWarnings("unchecked")
@@ -231,6 +233,7 @@ public abstract class AbstractBootstrap<B extends AbstractBootstrap<B, C>, C ext
      * Create a new {@link Channel} and bind it.
      */
     public ChannelFuture bind() {
+        //校验参数
         validate();
         SocketAddress localAddress = this.localAddress;
         if (localAddress == null) {
@@ -269,6 +272,7 @@ public abstract class AbstractBootstrap<B extends AbstractBootstrap<B, C>, C ext
     }
 
     private ChannelFuture doBind(final SocketAddress localAddress) {
+        //初始化和注册
         final ChannelFuture regFuture = initAndRegister();
         final Channel channel = regFuture.channel();
         if (regFuture.cause() != null) {
@@ -307,6 +311,7 @@ public abstract class AbstractBootstrap<B extends AbstractBootstrap<B, C>, C ext
     final ChannelFuture initAndRegister() {
         Channel channel = null;
         try {
+            //获取channel工厂 在创作factory时已经制定channel类型
             channel = channelFactory.newChannel();
             init(channel);
         } catch (Throwable t) {

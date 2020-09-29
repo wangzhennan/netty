@@ -82,6 +82,7 @@ public class ServerBootstrap extends AbstractBootstrap<ServerBootstrap, ServerCh
     public ServerBootstrap group(EventLoopGroup parentGroup, EventLoopGroup childGroup) {
         super.group(parentGroup);
         if (this.childGroup != null) {
+            //
             throw new IllegalStateException("childGroup set already");
         }
         this.childGroup = ObjectUtil.checkNotNull(childGroup, "childGroup");

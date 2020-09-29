@@ -35,7 +35,7 @@ public class DatagramUnicastIPv6Test extends DatagramUnicastTest {
             if (PlatformDependent.javaVersion() < 7) {
                 throw new UnsupportedOperationException();
             }
-            Channel channel = SelectorProvider.provider().openDatagramChannel(StandardProtocolFamily.INET6);
+            Channel channel =   SelectorProvider.provider().openDatagramChannel(StandardProtocolFamily.INET6);
             channel.close();
         } catch (UnsupportedOperationException e) {
             Assume.assumeNoException("IPv6 not supported", e);
